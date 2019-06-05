@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Rutas de autenticación
 Auth::routes();
 
+// Ruta al home (será eliminado)
 Route::get('/home', 'HomeController@index')->name('home');
+
+// CRUD para los 'formatos'.
+Route::resource('formatos', 'FormatoController');

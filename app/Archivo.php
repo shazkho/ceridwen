@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Representa a los archivos (modelo de Eloquent)
  *
  * @package App
- * @author  GeorgeShazkho <shazkho@gmail.com>
+ * @author GeorgeShazkho <shazkho@gmail.com>
  * @version 0.1
  */
 class Archivo extends Model

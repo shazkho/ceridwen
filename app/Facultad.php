@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Representa a las facultades (modelo de Eloquent)
  *
  * @package App
- * @author  GeorgeShazkho <shazkho@gmail.com>
+ * @author GeorgeShazkho <shazkho@gmail.com>
  * @version 0.1
  */
 class Facultad extends Model
