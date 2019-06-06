@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Facultad;
 use App\Helpers\CrudHelper;
 use Illuminate\Http\Request;
-use App\Formato;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\View;
+;
 
 /**
  * Class FormatoController
@@ -16,7 +14,7 @@ use Illuminate\Support\Facades\View;
  *
  * @package App\Http\Controllers
  * @author  GeorgeShazkho<shazkho@gmail.com>
- * @version 0.1
+ * @version 0.2
  */
 class FormatoController extends Controller
 {
@@ -89,7 +87,7 @@ class FormatoController extends Controller
      */
     public function edit($id)
     {
-        return null;
+        return CrudHelper::renderEdit('Formato', $id);
     }
 
     /**
@@ -104,7 +102,7 @@ class FormatoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return null;
+        return CrudHelper::update('Formato', $id, $request);
     }
 
     /**
@@ -118,6 +116,6 @@ class FormatoController extends Controller
      */
     public function destroy($id)
     {
-        return null;
+        return CrudHelper::destroy('Formato', $id);
     }
 }

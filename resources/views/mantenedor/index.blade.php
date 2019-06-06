@@ -31,6 +31,7 @@
                 <th>{{ $columnOptions['alias'] }}</th>
             @endif
         @endforeach
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -41,11 +42,17 @@
         @else
             @foreach($data as $row)
                 <tr>
-                @foreach($columns as $columnName => $columnOptions)
-                    @if($columnOptions['show'])
-                        <td>{{ $row->$columnName }}</td>
-                    @endif
-                @endforeach
+                    @foreach($columns as $columnName => $columnOptions)
+                        @if($columnOptions['show'])
+                            <td>{{ $row->$columnName }}</td>
+                        @endif
+                    @endforeach
+                    <td>
+                        {!! Form::open(['url' => route($name . '.destroy', [$row->id]), 'method' => 'DELETE']) !!}
+                        <a href="{{ route($name . '.edit', [$row->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                        {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) }}
+                        {!! Form::close() !!}
+                    </td>
                 </tr>
             @endforeach
         @endif

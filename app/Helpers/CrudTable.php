@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Helpers
  * @author  GeorgeShazkho<shazkho@gmail.com>
- * @version 0.1
+ * @version 0.2
  */
 class CrudTable
 {
@@ -36,15 +36,20 @@ class CrudTable
     /**
      * CrudTable constructor. Initializes object using model name.
      *
-     * @param $modelName
+     * @param   string          $modelName  The name of the model, as string.
+     * @param   null|integer    $id         Id of the current editing record.
      *
      * @author  GeorgeShazkho<shazkho@gmail.com>
-     * @version 0.1
+     * @version 0.2
      */
-    public function __construct($modelName)
+    public function __construct($modelName, $id=null)
     {
         $modelClass = sprintf('\App\%s', $modelName);
-        $this->model = new $modelClass();
+        if($id === null) {
+            $this->model = new $modelClass();
+        } else {
+            $this->model = $modelClass::find($id);
+        }
         $this->name = $this->model->getTable();
         $this->columns = $this->getColumnsFromDatabase($this->name);
     }
@@ -203,15 +208,19 @@ class CrudTable
      */
 
     /**
-     * Retrieves every record on database. This is intended to be used on 'index' views.
+     * Retrieves records from database. This is intended to be used on any view.
      *
+     * @param   null|integer        $id An identifier to find a certain row.
      * @return  Collection|Model[]  A collection of all entries on pre-defined database table (from model).
      *
      * @author  GeorgeShazkho<shazkho@gmail.com>
-     * @version 0.1
+     * @version 0.2
      */
-    public function getAllData()
+    public function getData($id=null)
     {
+        if($id !== null) {
+            return $this->model->find($id);
+        }
         return $this->model::all();
     }
 
