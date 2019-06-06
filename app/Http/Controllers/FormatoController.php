@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facultad;
 use App\Helpers\CrudHelper;
 use Illuminate\Http\Request;
 use App\Formato;
@@ -25,12 +26,11 @@ class FormatoController extends Controller
      * @return  Response   Una vista mostrando todos los registros.
      *
      * @author  GeorgeShazkho<shazkho@gmail.com>
-     * @version 0.1
+     * @version 0.2
      */
     public function index()
     {
-        $crud = new CrudHelper();
-        return $crud::renderIndex(new Formato, 'formatos', [
+        return CrudHelper::renderIndex('Formato', [
             'hide'      => ['created_at', 'updated_at'],
             'title'     => 'Título',
         ]);
@@ -42,11 +42,12 @@ class FormatoController extends Controller
      * @return  Response    Una vista con el formulario para crear el recurso.
      *
      * @author  GeorgeShazkho<shazkho@gmail.com>
-     * @version 0.1
+     * @version 0.2
      */
     public function create()
     {
-        return null;
+        return CrudHelper::renderCreate('Formato');
+        //return CrudHelper::renderCreate(new Facultad, 'facultades');
     }
 
     /**
@@ -60,7 +61,7 @@ class FormatoController extends Controller
      */
     public function store(Request $request)
     {
-        return null;
+        return CrudHelper::store('Formato', $request);
     }
 
     /**

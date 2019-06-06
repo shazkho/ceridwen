@@ -19,3 +19,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // CRUD para los 'formatos'.
 Route::resource('formatos', 'FormatoController');
+Route::resource('facultades', 'FormatoController');

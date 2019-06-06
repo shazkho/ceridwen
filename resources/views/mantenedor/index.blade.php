@@ -7,10 +7,8 @@
     IMPORTANT:  This view MUST be called using "renderIndex" function con controller. It can
                 obviously be called directly, just be careful, some variables are dinamically created.
 
-    Plugin version:     0.2
-    File version:       1.0
-    Version date:       2019/06/03
-    Laravel version:    5.8.*
+    File version:   0.2
+    Author:         GeorgeShazkho<shazkho@gmail.com>
 
 --}}
 
@@ -20,14 +18,17 @@
 
 @section('content')
 
-    <h1 class="mt-5 mb-4">Showing {{ $data->count() }} '{{ $resource }}'.</h1>
+    <h1 class="mt-5 mb-4">
+        Showing {{ $data->count() }} '{{ $name }}'.
+        <a href="{{ route($name . '.create') }}" class="btn btn-outline-success btn-sm float-right">Create new</a>
+    </h1>
 
     <table class="table table-sm">
         <thead>
         <tr>
-        @foreach($columns as $columnName => $columnAlias)
-            @if($columnAlias !== null)
-                <th>{{ $columnAlias }}</th>
+        @foreach($columns as $columnName => $columnOptions)
+            @if($columnOptions['show'])
+                <th>{{ $columnOptions['alias'] }}</th>
             @endif
         @endforeach
         </tr>
@@ -40,8 +41,8 @@
         @else
             @foreach($data as $row)
                 <tr>
-                @foreach($columns as $columnName => $columnAlias)
-                    @if($columnAlias !== null)
+                @foreach($columns as $columnName => $columnOptions)
+                    @if($columnOptions['show'])
                         <td>{{ $row->$columnName }}</td>
                     @endif
                 @endforeach

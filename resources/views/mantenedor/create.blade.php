@@ -7,10 +7,8 @@
     IMPORTANT:  This view MUST be called using "renderCreate" function con controller. It can
                 obviously be called directly, just be careful, some variables are dinamically created.
 
-    Plugin version:     0.1
-    File version:       1.0
-    Version date:       2019/06/03
-    Laravel version:    5.8.*
+    File version:   0.2
+    Author:         GeorgeShazkho<shazkho@gmail.com>
 
 --}}
 
@@ -20,11 +18,26 @@
 
 @section('content')
 
-    <h1 class="mt-5 mb-4">Creating a single '{{ $resource }}'.</h1>
+    <h1 class="mt-5 mb-5">Creating new entry in '{{ $name }}'.</h1>
 
-    {!! Form::open(['url' => route($resource . '.store')]) !!}
+    {!! Form::open(['url' => route($name . '.store')]) !!}
 
+    @foreach($columns as $columnName => $columnOptions)
+        @if($columnOptions['writable'])
+            <div class="form-group row">
+                <label for="{{ $columnName }}" class="col-sm-2 col-form-label">{{ $columnOptions['alias'] }}</label>
+                <div class="col-sm-6">
+                    {{ call_user_func(['Form', $columnOptions['type']], $columnName, null, ['class' => 'form-control']) }}
+                </div>
+            </div>
+        @endif
+    @endforeach
 
+    <div class="form-group row">
+        <div class="col-sm-6 offset-sm-2">
+            {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
 
     {!! Form::close() !!}
 
